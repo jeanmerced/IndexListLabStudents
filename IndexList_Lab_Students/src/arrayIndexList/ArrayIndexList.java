@@ -1,11 +1,13 @@
 package arrayIndexList;
 
+import java.lang.reflect.Array;
+
 import indexList.IndexList;
 
 public class ArrayIndexList<E> implements IndexList<E> {
-	private static final int INITCAP = 5; 
-	private static final int CAPTOAR = 5; 
-	private static final int MAXEMPTYPOS = 10; 
+	private static final int INITCAP = 1; 
+	private static final int CAPTOAR = 1; 
+	private static final int MAXEMPTYPOS = 2; 
 	private E[] element; 
 	private int size; 
 
@@ -71,6 +73,10 @@ public class ArrayIndexList<E> implements IndexList<E> {
 		return size;
 	}	
 	
+	public int capacity() {
+		return element.length;
+	}
+	
 	
 	
 	// private methods  -- YOU CAN NOT MODIFY ANY OF THE FOLLOWING
@@ -107,16 +113,34 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 
 	// The following two methods are to be implemented as part of an exercise
-	public Object[] toArray() {
-		// TODO es in Exercise 3
-		return null;
+	public Object[] toArray() { 
+		Object[] array = new Object[this.size()]; 
+	    for (int i = 0; i < size; i++) {
+	        array[i] = element[i];
+	    }
+	    return array;	
 	}
 
 
 	@Override
-	public <T1> T1[] toArray(T1[] array) {
-		// TODO as in Exercise 3
-		return null;
+	public <T> T[] toArray(T[] array) { 
+	    if (array.length < size) { 
+	    // if array.length < size, allocate a new array of the same 
+	    	// type as array (components of the new array are set to be of equal
+	    // runtime type as components of the original array array) 
+	    	// and big enough to hold all the elements in this set. For 
+	    	// this, we need to use the Array class....
+	    	array = (T[]) Array.newInstance(array.getClass().getComponentType(), size);
+	    } else if (array.length > size) 
+	    	// Set to null all those positions of array that won't be used. 
+	    	for (int j = size; j < array.length; j++) 
+	    		array[j] = null;
+	    
+	    for (int i = 0; i < size; i++) {
+	    	array[i] = (T) element[i];   // It is assumed element[i] can be casted to T
+	        
+	    }
+	    return array;	
 	}
 
 }
