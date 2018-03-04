@@ -47,12 +47,12 @@ public class IndexListTester {
 		showListAfterReplacing(list, 0, 30); 
 		showListAfterAdding(list, 3,  700); 
 
-		/******   delete this line only after completing stage 6 
+		
 		while (!list.isEmpty()) { 
 			showListAfterDeleting(list, list.size()-1); 
 			showListAfterDeleting(list, 0); 
 		}
-		*/ //**** delete this line only after completing stage 6
+		
 		
 		showListAfterAdding(list, 0,  700); 
 		showListAfterAdding(list, 1,  800); 
